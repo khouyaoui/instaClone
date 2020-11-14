@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: _downBar,
+      bottomNavigationBar: _downBar(),
     );
   }
 
@@ -161,10 +161,11 @@ class _HomePageState extends State<HomePage> {
   Widget _post() {
     return Container(
       width: double.infinity,
-      height: 400,
+      //height: double.infinity;
+      height: MediaQuery.of(context).size.height,
       // listbuilder para la memoria, mas eficiente cuando haya muchos datos
       child: ListView.builder(
-        itemCount: 30,
+        itemCount: 5,
         itemBuilder: (context, i) {
           return _creatPost("assets/img/str_1.jpg", "assets/img/post_1.jpg");
         },
@@ -261,6 +262,27 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
+    );
+  }
+
+  Widget _downBar() {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      elevation: 0,
+      iconSize: 25,
+      currentIndex: pActual,
+      onTap: (pageID) {
+        setState(() {
+          pActual = pageID;
+        });
+      },
+      items: [
+        BottomNavigationBarItem(icon: Icon(AntDesign.home), label: ''),
+        BottomNavigationBarItem(icon: Icon(AntDesign.search1), label: ''),
+        BottomNavigationBarItem(icon: Icon(Icons.add_box_outlined), label: ''),
+        BottomNavigationBarItem(icon: Icon(AntDesign.hearto), label: ''),
+        BottomNavigationBarItem(icon: Icon(AntDesign.user), label: ''),
+      ],
     );
   }
 }
