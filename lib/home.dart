@@ -8,9 +8,14 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.white70,
         appBar: _appBar(),
-        body: Column(
-          children: <Widget>[_etiquetas(), _historias()],
-        ));
+    body: Column(
+    children: <Widget>[_etiquetas(), _historias()],
+    )
+    );
+  }
+
+  Widget _navBar() {
+    return Container();
   }
 
   Widget _appBar() {
@@ -85,43 +90,41 @@ class HomePage extends StatelessWidget {
     return Container(
       height: 100,
       width: double.infinity,
-      margin: EdgeInsets.only(top: 10, left: 5.0),
+      margin: EdgeInsets.only(top: 5, left: 5.0),
       child: ListView(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
         children: <Widget>[
-          _crearItemHistoria(Colors.black, "Moha_"),
-          _crearItemHistoria(Colors.white70, "Javi_c"),
-          _crearItemHistoria(Colors.green, "Martina"),
-          _crearItemHistoria(Colors.pink, "Aleix_k"),
-          _crearItemHistoria(Colors.black, "Moha_"),
-          _crearItemHistoria(Colors.white70, "Javi"),
-          _crearItemHistoria(Colors.black, "Moha_"),
-          _crearItemHistoria(Colors.white70, "Javi_t"),
+          _crearItemHistoria(
+              Colors.black, "Your story", 'assets/img/str_1.jpg'),
+          _crearItemHistoria(Colors.white70, "Javi_", 'assets/img/str_2.jpg'),
+          _crearItemHistoria(Colors.green, "Jobi", 'assets/img/str_3.jpg'),
+          _crearItemHistoria(Colors.pink, "Aleix_k", 'assets/img/str_4.jpg'),
+          _crearItemHistoria(Colors.black, "Eiki", 'assets/img/str_5.jpg'),
+          _crearItemHistoria(Colors.white70, "Sashi", 'assets/img/str_6.jpg'),
         ],
       ),
     );
   }
 
-  Widget _crearItemHistoria(Color color, String user) {
+  Widget _crearItemHistoria(Color color, String user, String asset) {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 3),
+          margin: EdgeInsets.symmetric(horizontal: 5),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(50.0),
+            child: Image(
+              image: AssetImage(asset),
+              width: 65,
+              height: 65,
+              fit: BoxFit.cover,
+            ),
+          ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50.0),
-            border: Border.all(width: 3, color: Color(0xFF844AD)),
-          ),
-          child: Container(
-            height: 70,
-            width: 70,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/img/str_1.jpg'),
-                fit: BoxFit.cover,
-              ),
-              borderRadius: BorderRadius.circular(50.0),
-            ),
+            border: Border.all(
+                width: 3.0, color: Color.fromRGBO(245, 96, 64, 50.0)),
           ),
         ),
         SizedBox(
@@ -129,7 +132,12 @@ class HomePage extends StatelessWidget {
         ),
         Text(
           user,
-          style: TextStyle(fontSize: 14, color: Colors.black87),
+          style: user == ("Your story")
+              ? TextStyle(
+              fontSize: 14,
+              color: Colors.black87,
+              fontWeight: FontWeight.bold)
+              : TextStyle(fontSize: 14, color: Colors.black87),
         ),
       ],
     );
