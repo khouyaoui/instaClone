@@ -2,110 +2,34 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int pActual = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: _appBar(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              _etiquetas(),
-              _historias(),
-              Divider(
-                color: Colors.red,
-                height: 0,
-                thickness: 0.6,
-              ),
-              _post()
-            ],
-          ),
-        ));
-  }
-
-  Widget _post() {
-    return Container(
-      width: double.infinity,
-      height: 400,
-      // listbuilder para la memoria, mas eficiente cuando haya muchos datos
-      child: ListView.builder(
-        itemCount: 30,
-        itemBuilder: (context, i) {
-          return _creatPost("assets/img/str_1.jpg", "assets/img/post_1.jpg");
-        },
+      backgroundColor: Colors.white,
+      appBar: _appBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            _etiquetas(),
+            _historias(),
+            Divider(
+              color: Colors.red,
+              height: 0,
+              thickness: 0.6,
+            ),
+            _post()
+          ],
+        ),
       ),
-    );
-  }
-
-  Widget _creatPost(String asset, String imgPost) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Container(
-            child: Row(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(top: 10, left: 5, bottom: 10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50.0),
-                    child: Image(
-                      image: AssetImage(asset),
-                      width: 60,
-                      height: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Text(
-                  "Moha_",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                ),
-                Expanded(child: SizedBox()),
-                IconButton(icon: Icon(Icons.more_horiz), onPressed: () {})
-              ],
-            ),
-          ),
-          FadeInImage(
-            placeholder: AssetImage(imgPost),
-            image: AssetImage(imgPost),
-          ),
-          Container(
-            padding: EdgeInsets.all(3.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    IconButton(
-                        icon: Icon(FontAwesome.heart_o), onPressed: () {}),
-                    IconButton(
-                        icon: Icon(FontAwesome.comment_o), onPressed: () {}),
-                    IconButton(
-                        icon: Icon(FontAwesome.send_o), onPressed: () {}),
-                  ],
-                ),
-                IconButton(icon: Icon(FontAwesome.bookmark_o), onPressed: () {})
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 5),
-            child: Row(
-              children: <Widget>[Text("Like by Mksd22, Aeoor, 10 others")],
-            ),
-          ),
-          /*
-          Container(
-            child: Column(
-              children: <Widget> [
-
-              ],
-            ),
-          )
-           */
-        ],
-      ),
+      bottomNavigationBar: _downBar,
     );
   }
 
@@ -231,6 +155,112 @@ class HomePage extends StatelessWidget {
               : TextStyle(fontSize: 14, color: Colors.black87),
         ),
       ],
+    );
+  }
+
+  Widget _post() {
+    return Container(
+      width: double.infinity,
+      height: 400,
+      // listbuilder para la memoria, mas eficiente cuando haya muchos datos
+      child: ListView.builder(
+        itemCount: 30,
+        itemBuilder: (context, i) {
+          return _creatPost("assets/img/str_1.jpg", "assets/img/post_1.jpg");
+        },
+      ),
+    );
+  }
+
+  Widget _creatPost(String asset, String imgPost) {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Container(
+            child: Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(top: 10, left: 5, bottom: 10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50.0),
+                    child: Image(
+                      image: AssetImage(asset),
+                      width: 60,
+                      height: 60,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Text(
+                  "Moha_",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                ),
+                Expanded(child: SizedBox()),
+                IconButton(icon: Icon(Icons.more_horiz), onPressed: () {})
+              ],
+            ),
+          ),
+          FadeInImage(
+            placeholder: AssetImage(imgPost),
+            image: AssetImage(imgPost),
+          ),
+          Container(
+            padding: EdgeInsets.all(3.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    IconButton(
+                        icon: Icon(FontAwesome.heart_o), onPressed: () {}),
+                    IconButton(
+                        icon: Icon(FontAwesome.comment_o), onPressed: () {}),
+                    IconButton(
+                        icon: Icon(FontAwesome.send_o), onPressed: () {}),
+                  ],
+                ),
+                IconButton(icon: Icon(FontAwesome.bookmark_o), onPressed: () {})
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 5),
+            child: Row(
+              children: <Widget>[Text("Like by Mksd22, Aeoor, 10 others")],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 5),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                          text: "Tintín ",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)),
+                      TextSpan(
+                          text:
+                              " es un personaje de historieta creado por el dibujante belga Hergé, protagonista de la serie Las aventuras de Tintín.",
+                          style: TextStyle(color: Colors.black))
+                    ],
+                  ),
+                ),
+                Container(
+                    alignment: Alignment.topLeft,
+                    margin: EdgeInsets.only(top: 3),
+                    child: Text(
+                      "14 November",
+                      style: TextStyle(color: Colors.black38),
+                    )),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
